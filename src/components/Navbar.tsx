@@ -9,11 +9,9 @@ const Navbar = () => {
   return (
     <div className="nav">
       <NavLink to="/" className="link">
-        Home
+        Home / Take a new test
       </NavLink>
-      <NavLink to="/create" className="link">
-        New Task
-      </NavLink>
+
       <div className="date">{date}</div>
     </div>
   );

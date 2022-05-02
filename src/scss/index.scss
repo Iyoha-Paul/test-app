@@ -20,9 +20,9 @@ code {
     monospace;
 }
 .date {
-  position: fixed;
-  top: 7rem;
-  right: 05%;
+  // position: fixed;
+  // top: 7rem;
+  // right: 05%;
   font-size: 4rem;
   color: $primary-color;
 }
@@ -74,4 +74,7 @@ code {
       color: #747474;
     }
   }
+}
+.home {
+  margin-top: 9rem;
 }
