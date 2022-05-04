@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 $primary-color: #f1356d;
 $secondary-color: #495057;
-$text-color: #e9ecef;
+$text-color: #495057;
 $mobile: 30em;
 @mixin mobile {
   @media (max-width: $mobile) {
