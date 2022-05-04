@@ -1,25 +1,63 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
-
+// import useFetch from "../hooks/useFetch";
+import TestQuestions from "./TestQuestions";
 const TestParameters = () => {
   const [qNum, setQNum] = useState<number>(1);
   const [difficulty, setDifficulty] = useState<string>("");
   const [category, setCategory] = useState<string>("");
-  const [url, setUrl] = useState<string>("");
+  // const [url, setUrl] = useState<string>("");
+  // const { data: questions, isLoading, error } = useFetch(url);
+  const { saveQuestions } = TestQuestions();
   const [testParamSet, setTestParamSet] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState<any>();
+  const [error, setError] = useState(null);
+  // FUNCTIONS//FUNCTIONS//FUNCTIONS
+  const fetchData = (url: string) => {
+    setIsLoading(true);
+    const abortCont = new AbortController();
+    fetch(url, { signal: abortCont.signal })
+      .then((res) => {
+        if (!res.ok) {
+          throw Error("data not found");
+        }
+
+        return res.json();
+      })
+      .then((data) => {
+        // console.log(data);
+        setData(data);
+        // saveQuestions(data);
+        setIsLoading(false);
+        setError(null);
+      })
+      .catch((err) => {
+        if (err.name === "AbortError") {
+          console.log("fetch aborted");
+        }
+        setError(err.message);
+        // setIsLoading(false);
+        // console.log(data);
+      });
+  };
+
+  // console.log(error);
+  // console.log(data);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setUrl(
+    fetchData(
       `https://opentdb.com/api.php?amount=${qNum}${
         category ? `&category=${category}` : ""
       }${difficulty ? `&difficulty=${difficulty}` : ""}&type=multiple`
     );
-    console.log({ questions });
-    console.log(url);
+    setTestParamSet(true);
+    // console.log(url);
   };
-  const { data: questions, isLoading, error } = useFetch(url);
-
+  const handleReload = () => {
+    window.location.reload();
+  };
   return (
     <div>
       <form action="" className="parameters" onSubmit={handleSubmit}>
@@ -45,7 +83,7 @@ const TestParameters = () => {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
-            <option value="any">Any Category</option>
+            <option value="">Any Category</option>
             <option value="9">General Knowledge</option>
             <option value="10">Entertainment: Books</option>
             <option value="11">Entertainment: Film</option>
@@ -83,20 +121,32 @@ const TestParameters = () => {
             onChange={(e) => setDifficulty(e.target.value)}
             className="form-parameter__answer"
           >
-            <option value="any">Any Difficulty</option>
+            <option value="">Any Difficulty</option>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
           </select>
         </div>
 
-        {testParamSet ? (
+        {isLoading && !!testParamSet ? (
+          <div>Please wait, Getting questions...</div>
+        ) : !isLoading && testParamSet ? (
           <NavLink to="/test" className="link buttons">
             Start Test!
           </NavLink>
         ) : (
           <button className="btn buttons">Get Questions</button>
         )}
+        <div>
+          {error ? (
+            <div>
+              error code: ({error}) please
+              <span onClick={handleReload}> reload page</span>
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
       </form>
 
       {/* {!isLoading? } */}
