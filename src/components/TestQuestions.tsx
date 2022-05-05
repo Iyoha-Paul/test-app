@@ -4,11 +4,21 @@ import React, { useState } from "react";
 
 const TestQuestions = () => {
   //   let questions = JSON.parse(localStorage.getItem("triviaQuestions") || "[]");
-
+  const shuffleArray = (array: any) => {
+    const solh = [...array].sort(() => Math.random() - 0.5);
+    return solh;
+  };
   const saveQuestions = (questions: any) => {
     // Alltodos.push(todo);
-    localStorage.setItem("triviaQuestions", JSON.stringify(questions));
-    console.log(JSON.stringify(questions));
+    const allQuestionsReady = questions.results.map((question: any) => ({
+      ...question,
+      answers: shuffleArray([
+        ...question.incorrect_answers,
+        question.correct_answer,
+      ]),
+    }));
+    localStorage.setItem("triviaQuestions", JSON.stringify(allQuestionsReady));
+    // console.log(JSON.stringify(allQuestionsReady));
   };
 
   const handleClearAll = () => {

@@ -152,3 +152,38 @@ code {
     }
   }
 }
+.test {
+  .qstn {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+  .optns {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    &__optn {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      button {
+        background-color: #fff;
+        border: none;
+
+        .fa-circle {
+          width: 1.6rem;
+          height: 1.6rem;
+          cursor: pointer;
+          padding: 1rem;
+          color: rgb(0, 0, 0);
+          // width: 6rem;
+        }
+      }
+      .correct {
+        color: green;
+        font-size: 3rem;
+      }
+    }
+  }
+}

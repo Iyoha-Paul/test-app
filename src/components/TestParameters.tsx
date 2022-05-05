@@ -28,7 +28,7 @@ const TestParameters = () => {
       .then((data) => {
         // console.log(data);
         setData(data);
-        // saveQuestions(data);
+        saveQuestions(data);
         setIsLoading(false);
         setError(null);
       })
