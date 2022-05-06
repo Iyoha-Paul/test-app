@@ -10,7 +10,7 @@ import Result from "./pages/Result";
 // x
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={window.location.pathname || ""}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/test" element={<Test />} />
