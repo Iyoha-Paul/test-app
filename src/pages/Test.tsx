@@ -38,8 +38,8 @@ const Test = () => {
     confirmScore();
     setRevealAnswer(true);
 
-    saveScore(score);
     setFestFinished(true);
+    saveScore(score);
   };
   const confirmScore = () => {
     selectedOption === currentQuestion.correct_answer
@@ -89,7 +89,8 @@ const Test = () => {
                   : "❌"}
               </div>
               <div className="optns__answer__ans">
-                correct answer: <span>{currentQuestion.correct_answer}</span>
+                correct answer:{" "}
+                <span>{parse(currentQuestion.correct_answer)}</span>
               </div>
             </div>
           )}

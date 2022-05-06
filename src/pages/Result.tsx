@@ -3,9 +3,8 @@ import { NavLink } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import TestQuestions from "../components/TestQuestions";
 const Result = () => {
-  const score = JSON.parse(
-    localStorage.getItem("triviaQuestionsScore") || "[]"
-  );
+  const temp = JSON.parse(localStorage.getItem("triviaQuestionsScore") || "[]");
+  const score = temp === 0 ? 0 : temp + 1;
   const Questions = JSON.parse(localStorage.getItem("triviaQuestions") || "[]");
   const totalQstn = Questions.length;
   return (
@@ -14,13 +13,13 @@ const Result = () => {
       <div className="container result">
         <h1>Thanks for playing!</h1>
         <p>
-          score:{" "}
+          score:
           <span>
             {score}/{totalQstn}
           </span>
         </p>
         <div className="result__percent">
-          Percentage:{" "}
+          Percentage:
           <span>{Math.floor((Number(score) * 100) / Number(totalQstn))}%</span>
         </div>
         <div>
