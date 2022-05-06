@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import NotFound from "./pages/NotFound";
 import Test from "./pages/Test";
+import Result from "./pages/Result";
 
 // x
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/test" element={<Test />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/result" element={<Result />} />
 
         {/* <Route path="/create" element={<TodoInput />} /> */}
         {/* <Route path="/edit/:id" element={<EditTodo />} /> */}

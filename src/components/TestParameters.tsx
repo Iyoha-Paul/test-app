@@ -129,7 +129,7 @@ const TestParameters = () => {
         </div>
 
         {isLoading && !!testParamSet ? (
-          <div>Please wait, Getting questions...</div>
+          <div className="loading">Please wait, Getting questions...</div>
         ) : !isLoading && testParamSet ? (
           <NavLink to="/test" className="link buttons">
             Start Test!

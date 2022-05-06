@@ -20,12 +20,14 @@ const TestQuestions = () => {
     localStorage.setItem("triviaQuestions", JSON.stringify(allQuestionsReady));
     // console.log(JSON.stringify(allQuestionsReady));
   };
-
+  const saveScore = (score: Number) => {
+    localStorage.setItem("triviaQuestionsScore", JSON.stringify(score));
+  };
   const handleClearAll = () => {
     localStorage.setItem("triviaQuestions", "");
     // window.location.reload();
   };
-  return { saveQuestions, handleClearAll };
+  return { saveQuestions, handleClearAll, saveScore };
 };
 
 export default TestQuestions;
